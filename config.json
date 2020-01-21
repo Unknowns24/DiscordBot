@@ -1,0 +1,93 @@
+{
+  "title": "UNK-Bot",
+  "token": "NjEzNzQ4NDAzNjE2MzUwMjEx.XiUavg.QUH8G5OIadth9sch2o_mqs2YnIA", 
+  "database": "./database/database.db",
+  "prefix": "/",
+  "system" : "Linux",
+  "botversion": "v1.9",
+  "ultfechademod": "16/1/2020",
+  "lastverchangelog": "",
+  "botgamesfuctions": "FiveM",
+
+  "color": "#7289da",
+  "premcolor": "#f4f4f4",
+  "svname": "🌍 ALAF | Community 🌍",
+  "fivemsv": "Alaf RolePlay #1",
+  "fivemip": "51.83.33.73:30120",
+  "srank": "「👑」Founders",
+  "brank": "「👑」Founders",
+  "civilrol": "「👦」 Ciudadano",
+
+  "_____comentario1":"abajo de esto iran todas las configs del comando info dejar en null si no tienes",
+  
+  "infomsgcolor":"#FFFFFF",
+  "infocmdtitle": "Informacion General de",
+
+  "category1": "📌 | Informacion",
+  "category1value":"esta es una comunidad gaming en sus inicios",
+  
+  "category2": "💳 | donaciones",
+  "category2value": "Si quieres ayudar a esta comunidad donando contacta a un fundador",
+  
+  "category3": "📛 | problemas?",
+  "category3value":"si tienes algun problema contacta con nuestro staff para poder solucionarlo",
+
+  "category4longcategory":"🎮 | Servidores",
+  "category4longcategoryvalue":"FiveM:\n ALAFRP #1: 51.83.33.73:30120",
+
+  "category5longcategory":"🔎 | foro",
+  "category5longcategoryvalue":"https://alafcommunity.com/foro/",
+
+  "infomsguserscategory": "📈 | Estadisticas Discord",
+  
+  
+  "_____comentario2":"abajo de esto iran todos los rangos del commando addrole dejar en null si no existe ese rango",
+  
+  "highrank": "「👑」Founders",
+  "programador": "「💻」Programador",
+  "diseñador": "「🎨」Diseñador",
+  "GameMaster": "「🚫」Game Master",
+  "AdmDis": "「🌌」Admin Discord",
+  "jefegc": "「👮」Jefe de GC",
+  "jefeems": "「👨‍⚕️」Jefe Ems",
+  "jefemecano": "「🦺」 Jefe Mecanicos",
+  "encargadomafia": "「🧥」Encargado Mafias",
+  "oposstaff": "「💼」Opos Staff",
+  "oposgc": "「💼」Opos GC",
+  "oposems": "「💼」Opos Ems",
+  "opostaxi": "「💼」Opos Taxi",
+  "oposmecano": "「💼」Opos Mecanico",
+
+  "_____comentario3":"abajo de esto ira la id del canal para los avisos del comando donar",
+
+  "dndcanalid":"650409965944832024",
+  
+  "_____comentario4":"abajo de esto ira la config del comando sugerencia",
+
+  "suggestchannelid":"650531635367772201",
+
+  "_____comentario5":"abajo de esto ira la config del comando sm dejar en null si no hay",
+
+  "sendspammenssage1":"「👑」Founders",
+  
+  "sendspammenssage2":"「🌌」Admin Discord",
+  
+  "sendspammenssage3":"「🚫」Game Master",
+
+  "sendspammenssage4":"null",
+
+  "automsg1description":"mensaje para avisar que el server esta abierto",
+  
+  "automsg2description":"mensaje para avisar que el server esta en mantenimiento",
+
+  "automsg3description":"mensaje para avisar que se reailizo una actualizacion",
+
+  "automsg4description":"mensaje para avisar que se esta buscando staff",
+
+  "changelogchannelid": "639944340105461771",
+  
+  "normasstaffchannelid": "639948847543746575",
+
+  "staffchannelid": "639954940449652738"
+
+}
