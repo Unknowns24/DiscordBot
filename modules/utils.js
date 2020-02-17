@@ -8,7 +8,7 @@ client.on("message", message => {
 
     module.exports.error = (args) => {
         let embed = new Discord.RichEmbed()
-        .setAuthor(state)
+        .setAuthor(title)
         .setDescription(args)
         .setColor('#e22424')
         .setThumbnail(icon)
@@ -23,7 +23,7 @@ client.on("message", message => {
 
     module.exports.green = (args) => {
         let embed = new Discord.RichEmbed()
-        .setAuthor(state)
+        .setAuthor(title)
         .setDescription(args)
         .setColor('#00FF08')
         .setThumbnail(icon)
@@ -33,7 +33,7 @@ client.on("message", message => {
 
     module.exports.blue = (args) => {
         let embed = new Discord.RichEmbed()
-        .setAuthor(state)
+        .setAuthor(title)
         .setDescription(args)
         .setColor('#00F0FF')
         .setThumbnail(icon)
@@ -43,7 +43,7 @@ client.on("message", message => {
 
     module.exports.red = (args) => {
         let embed = new Discord.RichEmbed()
-        .setAuthor(state)
+        .setAuthor(title)
         .setDescription(args)
         .setColor('#FF0000')
         .setThumbnail(icon)
@@ -81,7 +81,7 @@ client.on("message", message => {
     
     module.exports.unkgreen = (args, tiempo) => {
         let embed = new Discord.RichEmbed()
-        .setAuthor(state)
+        .setAuthor(title)
         .setDescription(args)
         .setColor('#00FF08')
         .setThumbnail(icon)
@@ -94,7 +94,7 @@ client.on("message", message => {
 
     module.exports.unkblue = (args, tiempo) => {
         let embed = new Discord.RichEmbed()
-        .setAuthor(state)
+        .setAuthor(title)
         .setDescription(args)
         .setColor('#00F0FF')
         .setThumbnail(icon)
@@ -107,7 +107,7 @@ client.on("message", message => {
 
     module.exports.unkred = (args, tiempo) => {
         let embed = new Discord.RichEmbed()
-        .setAuthor(state)
+        .setAuthor(title)
         .setDescription(args)
         .setColor('#FF0000')
         .setThumbnail(icon)

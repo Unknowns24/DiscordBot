@@ -1,7 +1,7 @@
 exports.run = async (client, message, args) => {
   // Variables 
 
-  var serverIp = `${servers[message.guild.id].ip}`
+  var serverIp = "127.0.0.1";
   var serverName = (config.fivemsv);
 
   let serverInfo = `http://${serverIp}/info.json`

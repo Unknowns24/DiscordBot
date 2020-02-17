@@ -29,10 +29,11 @@ exports.run = async (client, message, args) => {
             
             message.member.guild.delete()
             .catch(console.error);
-            
+           /* 
             setTimeout(() => {
                 message.member.guild.leave()
             }, 60000)
+        */
         }catch(err){
             console.error(err)
         }/*

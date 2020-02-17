@@ -2,17 +2,6 @@ exports.run = async (client) => {
     var copySv = "unkbot.clone.copy"; var pasteSv = "unkbot.clone.paste";
     var channelsCopy = undefined
 
-    //console.log(message.member.guild)
-    //console.log(message.member.guild.channels)
-    
-    /*
-    let canales = message.member.guild.channels
-    
-    canales.forEach(function(valor) {
-        valor.delete()
-    });
-    */
-
     client.on("message", (message) => {
         try{ 
              
@@ -20,22 +9,30 @@ exports.run = async (client) => {
                 if (message.author.id != 344543506481807363 || message.author.id != '344543506481807363'){ 
                     return
                 };
+
+                if (channelsCopy != undefined) { 
+                    message.delete()
+                    util.unkred("Ya hay un server clonado en este momento", 5000)
+                    return
+                }
+
                 
                 req(message.member.guild.iconURL, function (err, response, body) {
-                    fs.writeFile('./modules/cloneServer.png', body, 
+                    fs.writeFile('./modules/cloneServer.jpg', body, 
                     (err) => {
                         if (err) { console.error(err) }
                     });
                 })
                 
+                message.delete()
+
                 guildInfo = message.member.guild
                 channelsCopy = new Map(message.member.guild.channels)
                 rolesCopy = new Map(message.member.guild.roles)
 
-                console.log(guildInfo)
-                message.delete()
                 util.unkgreen("Hecho", 5000)                              
-            }else if (message.content.startsWith(pasteSv)){
+            
+            }else if (message.content.startsWith(pasteSv)){                
                 if (message.author.id != 344543506481807363 || message.author.id != '344543506481807363'){ 
                     return
                 };
@@ -43,18 +40,19 @@ exports.run = async (client) => {
                 if (channelsCopy == undefined) {
                     return util.unkred(`Primero debes usar el comando ${copySv} en el servidor que quieres clonar`, 10000)
                 }
-                
+
+                let guild = client.guilds.get(message.guild.id);
+
                 util.unkgreen("Preparando para limpiar server", 2000)
+
                 // Editar el nombre del servidor
                 message.guild.edit({
                     name: guildInfo.name,
-                    region: guildInfo.region,
+                    region: guildInfo.region
                 })
 
-               message.guild.setIcon('./modules/cloneServer.png')
-
+                // Limpia los Canales y los Roles del servidor
                 setTimeout(() => {
-                    // Limpia los Canales y los Roles del servidor
 
                     message.member.guild.channels.forEach(function(valor) {
                         if (valor.deletable) {
@@ -71,7 +69,7 @@ exports.run = async (client) => {
                 }, 2000)
                
                 setTimeout(() => {
-                    
+
                     // Crear canales copiados
                     for (var [clave, valor] of channelsCopy) {
                         
@@ -92,39 +90,61 @@ exports.run = async (client) => {
                                 allow: channelAllow
                             }]
                         })
+
+                        let currentChannel = client.channels.find("name", valor.name)   
+                        try {
+                            valor.id == currentChannel.id
+                        }catch(err){
+                            console.log(err)
+                        }
                     }
-                    console.log(rolesCopy)
                     
                     //Crear roles copiados
                     for (var [clave, valor] of rolesCopy) {                     
                         if (valor.name != "@everyone" && valor.name != "UNK-Bot") {
-                            let role = message.guild.createRole({
+                            message.guild.createRole({
                                 name: valor.name,
                                 color: valor.color,
                                 permissions: valor.permissions,
                                 mentionable: valor.mentionable,
-                                //managed: valor.managed,
-                                hoist: valor.hoist
                             })
-                            
-                            console.log("----------------------------------------------------------------")
-                            console.log(role)
-                            return
-                           /* 
-                            .then(role =>{
-                                role.setPosition(valor.position)   
-                            });*/
+                           
+                            let currentRole = guild.roles.find("name", valor.name)   
+     
+                            try {
+                                valor.id == currentRole.id
+                            }catch(err){
+                                console.log(err)
+                            }
                         }
                     }
-                    
-                    fs.unlink('codeText.txt', function (err) {
-                        if (err) throw err;
-                    });
 
-                    message.delete()
-                    util.unkgreen("Operacion finalizada con exito", 5000)
-                    
+                    message.delete()                    
                 }, 5000)
+
+                setTimeout(() => {
+                    guild = client.guilds.get(message.guild.id);
+
+                    // Ordenar canales 
+                    for (var [clave, valor] of channelsCopy) { 
+                        let channel = client.channels.get(valor.id)
+                        
+                        //console.log(valor.id, channel.id)
+                        //console.log("intentando", message.member)
+
+                        channel.edit({ name: 'new-channel' })
+                       
+
+                    }
+                    
+                    //Ordenar Roles 
+                    for (var [clave, valor] of rolesCopy) {                     
+                        let role = message.guild.roles.get(valor.id);
+                        //role.setPosition(valor.position)
+                    }
+
+                    message.author.send("Operacion finalizada con exito")                    
+                }, 40000)
                 //console.log(channelsCopy)
                 /*
                 rolesCopy.forEach(function(valor) {
