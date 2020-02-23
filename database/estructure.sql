@@ -5,6 +5,7 @@ CREATE TABLE `servers`(
     id INT(4) AUTO_INCREMENT NOT NULL, 
     guild BIGINT(19) NOT NULL, 
     aproved INT(1) NOT NULL DEFAULT 0,
+    LicenseUsed VARCHAR(30) NOT NULL,
     joinedDate TIMESTAMP DEFAULT CURRENT_TIME,
 
     PRIMARY KEY(`id`)
@@ -12,7 +13,7 @@ CREATE TABLE `servers`(
 
 CREATE TABLE `licenses`(
     id INT(4) AUTO_INCREMENT NOT NULL, 
-    license VARCHAR(50) NOT NULL, 
+    license VARCHAR(30) NOT NULL, 
     inUse INT(1) NOT NULL DEFAULT 0,
     useByGuild BIGINT(19) NOT NULL, 
     useDate INT(12) NOT NULL DEFAULT 0,
