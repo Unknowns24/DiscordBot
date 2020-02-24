@@ -25,6 +25,8 @@ CREATE TABLE `svConfig`(
     guild BIGINT(19) NOT NULL, 
     welcomeChannel VARCHAR(19) NOT NULL, 
     welcomeRole VARCHAR(20) NOT NULL,
+    suggestChannel VARCHAR(19) NOT NULL,
+    fivemServerIP VARCHAR(21) NOT NULL, 
 
     PRIMARY KEY(`guild`)
 );

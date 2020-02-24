@@ -1,6 +1,5 @@
 exports.run = async (client, message, args) => {
   // Variables
-  var util = require("../modules/utils");    
   var user = message.author.id;
   var infucnb = false;
   var botname = (config.title);

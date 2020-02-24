@@ -1,19 +1,12 @@
-exports.run = async (client) => { 
+exports.run = async (client, msg, args) => { 
     /////////////
     // eventos //
     /////////////
 
-    ////////////////////////////////////////////
-    // Mensaje de Bienvenida y entrega de rol //
-    ////////////////////////////////////////////
-
     client.on("guildMemberAdd", (member) => {
-        console.log(`Nuevo usuario:  ${member.user.username} se ha unido a ${member.guild.name}.`);
-
-        var canal = client.channels.get('639849165584597014');
-        var crole = (config.civilrol);
-        let rolecivil = member.guild.roles.find("name", `${crole}`);  
         
+        var roleid; var canal; var noRegister = false; var canal; 
+
         const welcomemsg = new Discord.RichEmbed()
             .setColor('#00E4FF')
             .setTitle(` ${member.user.username} Bienid@!`)
@@ -26,16 +19,38 @@ exports.run = async (client) => {
             .setTimestamp()
             .setFooter('UNK-Bot © made by unknowns')
         ;
+
+        console.log(`Nuevo usuario:  ${member.user.username} se ha unido a ${member.guild.name}.`);
+
+        MySQL.query(`SELECT welcomeChannel, welcomeRole FROM svconfig WHERE guild = ${member.guild.id}`, (err, res) => {
+            if(err != null || err != undefined){
+                console.log("Error al conseguir los datos de la base de datos")
+            }else if(res[0] != undefined || res[0] != null){ 
+                canal   = res[0].welcomeChannel;
+                roleid  = res[0].welcomeRole; 
+            }else if(res[0] == undefined || res[0] == null){
+                console.log(`El server ${member.guild.name}, No esta configurado en la base de datos`)
+                noRegister = true;
+            };
+        });
         
-        canal.send(welcomemsg);
-        member.addRole(rolecivil).catch(console.error); 
+        setTimeout(() => {
+            if(noRegister == false){
+                let rolecivil = member.guild.roles.get(`${roleid}`)     
+                
+                client.channels.get(`${canal}`).send(welcomemsg)
+                member.addRole(rolecivil).catch(console.error); 
+            }else if(noRegister == true){
+                return;
+            }
+        }, 2500)
     });
     
     client.on("guildCreate", guild => {
         const aviseMsg = new Discord.RichEmbed()
             .setColor('#FBFF00')
             .setTitle(`📛 AVISO 📛`)
-            .setDescription(`⚠ Tienes 20 minutos para activar el UNK-Bot en ${guild.name} con el comando __/activar__, de lo contrario saldre de ese server ⚠`)
+            .setDescription(`⚠ Tienes 20 minutos para activar el UNK-Bot en ${guild.name} con el comando __/activar__ , de lo contrario saldre de ese server ⚠`)
             .setTimestamp()
             .setFooter('UNK-Bot © made by unknowns')
         ;
