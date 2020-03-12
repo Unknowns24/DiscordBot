@@ -6,7 +6,7 @@ CREATE TABLE `servers`(
     guild BIGINT(19) NOT NULL, 
     aproved INT(1) NOT NULL DEFAULT 0,
     LicenseUsed VARCHAR(30) NOT NULL,
-    joinedDate TIMESTAMP DEFAULT CURRENT_TIME,
+    joinedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 
     PRIMARY KEY(`id`)
 );

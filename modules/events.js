@@ -1,13 +1,36 @@
 exports.run = async (client, msg, args) => { 
+    
+    /////////////////
+    //  Variables  //
+    /////////////////
+
+    var prohibido = ["https", "discord.gg", "http", ".gg", ".onion", ".com", ".net", ".org", "www", "://"]
+
     /////////////
     // eventos //
     /////////////
-
+    
     client.on("guildMemberAdd", (member) => {
         
-        var roleid; var canal; var noRegister = false; var canal; 
+        try{
+            
+            console.log(`Nuevo usuario:  ${member.user.username} se ha unido a ${member.guild.name}.`);
+            
+            MySQL.query(`SELECT welcomeChannel, welcomeRole FROM svconfig WHERE guild = ${member.guild.id}`, (err, res) => {
+                if(err != null || err != undefined){
+                    console.log("Error al conseguir los datos de la base de datos")
+                }else if(res[0] != undefined || res[0] != null){ 
+                    canal   = res[0].welcomeChannel;
+                    roleid  = res[0].welcomeRole; 
+                }else if(res[0] == undefined || res[0] == null){
+                    console.log(`El server ${member.guild.name}, No esta configurado en la base de datos`)
+                    noRegister = true;
+                };
+            });
 
-        const welcomemsg = new Discord.RichEmbed()
+            var roleid; var canal; var noRegister = false; var canal; 
+            
+            const welcomemsg = new Discord.RichEmbed()
             .setColor('#00E4FF')
             .setTitle(` ${member.user.username} Bienid@!`)
             .setDescription(` :fire: <@${member.user.id}>, El staff de ${member.guild.name} te da la bienvenida a esta comunidad :fire:`)
@@ -18,34 +41,23 @@ exports.run = async (client, msg, args) => {
             .addField('📎 | No te lo olvides', 'Lee las normas para poder tener una mejor experiencia en nuestra comunidad')
             .setTimestamp()
             .setFooter('UNK-Bot © made by unknowns')
-        ;
-
-        console.log(`Nuevo usuario:  ${member.user.username} se ha unido a ${member.guild.name}.`);
-
-        MySQL.query(`SELECT welcomeChannel, welcomeRole FROM svconfig WHERE guild = ${member.guild.id}`, (err, res) => {
-            if(err != null || err != undefined){
-                console.log("Error al conseguir los datos de la base de datos")
-            }else if(res[0] != undefined || res[0] != null){ 
-                canal   = res[0].welcomeChannel;
-                roleid  = res[0].welcomeRole; 
-            }else if(res[0] == undefined || res[0] == null){
-                console.log(`El server ${member.guild.name}, No esta configurado en la base de datos`)
-                noRegister = true;
-            };
-        });
-        
-        setTimeout(() => {
-            if(noRegister == false){
-                let rolecivil = member.guild.roles.get(`${roleid}`)     
-                
-                client.channels.get(`${canal}`).send(welcomemsg)
-                member.addRole(rolecivil).catch(console.error); 
-            }else if(noRegister == true){
-                return;
-            }
-        }, 2500)
+            ;
+            
+            setTimeout(() => {
+                if(noRegister == false){
+                    let rolecivil = member.guild.roles.get(`${roleid}`)     
+                    client.channels.get(`${canal}`).send(welcomemsg)
+                    member.addRole(rolecivil).catch(console.error); 
+                    return;
+                }else if(noRegister == true){
+                    return;
+                }
+            }, 1000)
+        }catch(e){
+            console.log(e)
+        }
     });
-    
+        
     client.on("guildCreate", guild => {
         const aviseMsg = new Discord.RichEmbed()
             .setColor('#FBFF00')
@@ -96,6 +108,34 @@ exports.run = async (client, msg, args) => {
             return console.log(e)
         }
     });
+
+    client.on("message", message => {
+        try{
+            const advert = new Discord.RichEmbed()
+                .setColor('#FBFF00')
+                .setTitle(`📛 AVISO 📛`)
+                .setDescription(`⚠ No puedes enviar eso a ${message.guild.name}, debido a que se trata de un link o una de las palabras prohibidas ⚠`)
+                .setTimestamp()
+                .setFooter('UNK-Bot © made by unknowns')
+            ;
+
+            for(var [k,v] of prohibido){
+                if (message.content.includes(v)) {
+                    message.delete()
+                    message.author.send(advert)
+                    break
+                }
+            };
+        }catch(e){  
+
+            if (e == "TypeError: Cannot read property 'name' of null") {
+                return
+            }else {
+                console.log(e)
+                return
+            }
+        }
+    })
 
     client.on("error", (e) => console.error(e));
     client.on("warn", (e) => console.warn(e));
