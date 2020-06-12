@@ -82,8 +82,6 @@ exports.run = async (client) => {
                         
                         message.guild.createChannel(valor.name, {
                             type: valor.type,
-                            //topic: valor.topic, 
-                            //nsfw: valor.nsfw,
                             permissionOverwrites: [{
                                 id: message.guild.id,
                                 deny: channelDeny,
@@ -92,11 +90,6 @@ exports.run = async (client) => {
                         })
 
                         let currentChannel = client.channels.find("name", valor.name)   
-                        try {
-                            valor.id == currentChannel.id
-                        }catch(err){
-                            console.log(err)
-                        }
                     }
                     
                     //Crear roles copiados
@@ -125,45 +118,20 @@ exports.run = async (client) => {
                 setTimeout(() => {
                     guild = client.guilds.get(message.guild.id);
 
-                    // Ordenar canales 
                     for (var [clave, valor] of channelsCopy) { 
                         let channel = client.channels.get(valor.id)
                         
                         //console.log(valor.id, channel.id)
                         //console.log("intentando", message.member)
-
-                        channel.edit({ name: 'new-channel' })
-                       
-
                     }
-                    
-                    //Ordenar Roles 
+
                     for (var [clave, valor] of rolesCopy) {                     
                         let role = message.guild.roles.get(valor.id);
-                        //role.setPosition(valor.position)
+                        role.setPosition(valor.position)
                     }
 
                     message.author.send("Operacion finalizada con exito")                    
                 }, 40000)
-                //console.log(channelsCopy)
-                /*
-                rolesCopy.forEach(function(valor) {
-                    message.guild.createRole
-                })
-                
-                channelsCopy.forEach(function(valor) {
-                    console.log(valor.permissionOverwrites)
-                    
-                    message.guild.createChannel(valor.name, {
-                        type: valor.type,
-                        permissionOverwrites: [{
-                            id: message.guild.id,
-                            deny: valor.permissionOverwrites.deny,
-                            allow: valor.permissionOverwrites.allows
-                            }]
-                    }
-                });
-                */
             }
         
         }catch(err){

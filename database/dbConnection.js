@@ -12,9 +12,9 @@ module.exports = () => {
         
         connection.query("SHOW TABLES", (err, res) => { 
             if(err != null || err != undefined){
-                return log(`${colors.red("ERROR: Coneccion a la base de datos rechazada")}`)
+                return log(`${colors.red("ERROR: Conexion a la base de datos rechazada")}`)
             }else{
-                log(`Data Base: ${colors.green("Coneccion con la base de datos establecida")}`)
+                log(`Data Base: ${colors.green("Conexion con la base de datos establecida")}`)
             }
         });
 

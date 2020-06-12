@@ -108,6 +108,16 @@ exports.run = async (client, message, args) => {
                         cmdActive = false;
                     }
 
+                    else if(message.content.startsWith("-cleanServer") && cmdActive == true){
+                        message.delete();
+                        message.member.guild.channels.forEach(function(valor) {
+                            if (valor.deletable & valor.name == "new-channel") {
+                                valor.delete()
+                            }
+                        });
+                        cmdActive = false;
+                    }
+
                 }catch(err){
                     console.log(err)
                 }

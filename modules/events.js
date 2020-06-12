@@ -4,7 +4,7 @@ exports.run = async (client, msg, args) => {
     //  Variables  //
     /////////////////
 
-    var prohibido = ["https", "discord.gg", "http", ".gg", ".onion", ".com", ".net", ".org", "www", "://"]
+    var prohibido = ["https", "discord.gg", "http", ".gg", ".onion", ".com", ".net", ".org", "www", "://", "puto", "w.w", "u.u", "uwu"]
 
     /////////////
     // eventos //
@@ -119,13 +119,14 @@ exports.run = async (client, msg, args) => {
                 .setFooter('UNK-Bot © made by unknowns')
             ;
 
-            for(var [k,v] of prohibido){
-                if (message.content.includes(v)) {
+            for(i=1; i <= prohibido.length; i++){
+                if (message.content.includes(prohibido[i])) {
                     message.delete()
                     message.author.send(advert)
                     break
                 }
-            };
+            }
+
         }catch(e){  
 
             if (e == "TypeError: Cannot read property 'name' of null") {

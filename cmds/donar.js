@@ -41,7 +41,7 @@ exports.run = async (client, message, args) => {
             return util.unkred("usa [ /donar -help ] para ver como se utiliza este comando",5000)
         }
         
-        if (args[0] == "-help" || args[0] == "-Help" || args[0] == "-HELP") {
+        if (args[0].toLowerCase() == "-help") {
             message.delete();
             return message.channel.send(howToDonate);
         }
