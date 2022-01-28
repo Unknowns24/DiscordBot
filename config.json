@@ -1,6 +1,6 @@
 {
   "title": "UNK-Bot",
-  "token": "NjEzNzQ4NDAzNjE2MzUwMjEx.XiUavg.QUH8G5OIadth9sch2o_mqs2YnIA", 
+  "token": "", 
   "database": "./database/database.db",
   "prefix": "/",
   "system" : "Linux",
